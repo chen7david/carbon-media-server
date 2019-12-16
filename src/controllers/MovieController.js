@@ -14,11 +14,11 @@ module.exports = {
     },
     insert: async (req, res) => {
 
-        const { title, resolution, description } = req.body
-        const { videos, covers, posters, captions } = req.files
-
         try{
             const object = await Movie.transaction( async trx => {
+
+                const { title, resolution, description } = req.body
+                const { videos, covers, posters, captions } = req.files
 
                 const movie = await Movie.query(trx).insert({
                     title,
@@ -44,7 +44,7 @@ module.exports = {
                         .insert({filename, size, mimetype, default: index == 0})
                 }
 
-                for(const [index, caption] of captions.entries()){
+                for(const caption of captions){
                     const { filename, size, mimetype, originalname } = caption
                     let code = originalname.split('.')[1]
                     const srclang = Object.keys(LANGS).includes(code)? code : 'en'
@@ -68,7 +68,15 @@ module.exports = {
             const object = await Movie.transaction(async trx => {
                 const { movieId } = req.params
                 const movie = await Movie.query(trx)
-                .where('movieId',movieId).first()
+                    .withGraphFetched('[videos, covers, posters, captions]')
+                    .where('movieId', movieId).first()
+
+                const { videos, covers, posters, captions } = movie
+
+                videos.forEach(video => files.delete('/video/'+video.filename))
+                covers.forEach(cover => files.delete('/image/'+cover.filename))
+                posters.forEach(poster => files.delete('/image/'+poster.filename))
+                captions.forEach(caption => files.delete('/captions/'+caption.filename))
 
                 await movie.$query(trx).delete()
             })
