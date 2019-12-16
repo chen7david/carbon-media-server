@@ -18,10 +18,13 @@ module.exports = {
                 const { title, description, released } = req.body
                 const { covers, posters } = req.files
 
-                const tvshow = await TvShow.query(trx).insert({
+                const tvshow = await TvShow.query(trx).insertGraph({
                     title,
                     released,
-                    description
+                    description,
+                    seasons: [
+                        { number: 1 }
+                    ]
                 })
 
                 for(const [index, cover] of covers.entries()){

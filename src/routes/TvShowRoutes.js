@@ -15,9 +15,7 @@ router.route('/tvshows/create')
         {name:'captions', maxCount: 6},
     ]), TvShowController.insert)   
 
-router.route('/tvshows/:tvshowId/seasons')
-    .get(SeasonController.index) 
-
 router.route('/tvshows/:tvshowId/delete')
     .get(TvShowController.delete)
+    
 module.exports = router

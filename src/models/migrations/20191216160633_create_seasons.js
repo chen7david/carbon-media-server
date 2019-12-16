@@ -4,7 +4,7 @@ exports.up = function(knex) {
       table.increments()
       table.unique(['number', 'tvshow_id'])
       table.string('seasonId').unique().notNullable()
-      table.integer('number').unique()
+      table.integer('number')
       table.integer('tvshow_id').references('id').inTable('tvshows').onDelete('CASCADE').index()
       table.timestamps(true, true)
   })

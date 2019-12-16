@@ -2,15 +2,14 @@
 
 {% block body %} 
 <h1>Welcome to {{tvshow.title}} Seasons</h1>
-<div class="controls">
-  <a href="/tvshows/create" class="btn btn-outline-success btn-sm">ADD SEASON</a>
+<div class="row">
+  <a href="/tvshows/{{tvshow.tvshowId}}/seasons/create" class="btn btn-outline-success mr-1">ADD</a>
+  {% for season in tvshow.seasons %}
+        <a href="" class="btn btn-outline-success mx-1">{{season.number}}</a>
+  {% endfor %}
 </div>
 <div class="row mt-3">
-  {% for season in tvshow.seasons %}
-      <div class="">
-        {{season.number}}
-      </div>
-  {% endfor %}
+  
 {% endblock %}
 </div>
     

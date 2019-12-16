@@ -7,7 +7,8 @@ const port = require('./config').APP_PORT || 4000
 const {
     HomeRoutes, 
     MovieRoutes,
-    TvShowRoutes
+    TvShowRoutes,
+    SeasonRoutes
 } = require('./routes')
 
 // Set app parameters
@@ -25,6 +26,7 @@ app.use(cors())
 app.use(HomeRoutes)
 app.use(MovieRoutes)
 app.use(TvShowRoutes)
+app.use(SeasonRoutes)
 
 // Expose public directories
 app.use('/media', express.static(__dirname + '/public/uploads'))

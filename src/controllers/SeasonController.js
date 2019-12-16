@@ -1,7 +1,5 @@
 const { TvShow } = require('./../models')
-const { transaction } = require('objection')
 const files = require('./../helpers/files')
-const { LANGS } = require('./../config')
 module.exports = {
 
     index: async (req, res) => {
@@ -12,41 +10,46 @@ module.exports = {
         res.render('seasons/index.html', { tvshow })
     },
     create: async (req, res) => {
-        res.render('tvshows/create.html')
+        const { tvshowId } = req.params
+        const tvshow = await TvShow.query()
+            .withGraphFetched('[seasons, covers, posters]')
+            .where('tvshowId', tvshowId).first()
+        res.render('seasons/create.html', { tvshow })
     },
     insert: async (req, res) => {
 
         try{
             const object = await TvShow.transaction( async trx => {
+                
+                const { tvshowId } = req.params
+                const tvshow = await TvShow.query()
+                    .where('tvshowId', tvshowId).first()
 
-                const { title, description, released } = req.body
+                const { number } = req.body
                 const { covers, posters } = req.files
 
-                const tvshow = await TvShow.query(trx).insert({
-                    title,
-                    released,
-                    description
-                })
+                const season = await tvshow
+                    .$relatedQuery('seasons').insert({number})
 
-                for(const [index, cover] of covers.entries()){
-                    const { filename, size, mimetype } = cover
-                    await tvshow.$relatedQuery('covers', trx)
-                        .insert({filename, size, mimetype, default: index == 0})
-                }
+                // for(const [index, cover] of covers.entries()){
+                //     const { filename, size, mimetype } = cover
+                //     await tvshow.$relatedQuery('covers', trx)
+                //         .insert({filename, size, mimetype, default: index == 0})
+                // }
 
-                for(const [index, poster] of posters.entries()){
-                    const { filename, size, mimetype } = poster
-                    await tvshow.$relatedQuery('posters', trx)
-                        .insert({filename, size, mimetype, default: index == 0})
-                }
-
-                return tvshow;
+                // for(const [index, poster] of posters.entries()){
+                //     const { filename, size, mimetype } = poster
+                //     await tvshow.$relatedQuery('posters', trx)
+                //         .insert({filename, size, mimetype, default: index == 0})
+                // }
+                console.log({season})
+                return season;
             })
 
-            return res.redirect('/tvshows')
+            return res.redirect(`/tvshows/${tvshowId}/seasons/create`)
         }catch(err){
             console.log(err)
-            return res.redirect('/tvshows')
+            return res.redirect(`/tvshows`)
         }
     },
 
