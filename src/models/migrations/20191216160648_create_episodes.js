@@ -5,7 +5,6 @@ exports.up = function(knex) {
       table.string('episodeId').unique().notNullable()
       table.string('title').unique().notNullable()
       table.text('description')
-      table.string('poster')
       table.date('released')
       table.integer('season_id').references('id').inTable('seasons').onDelete('CASCADE').index()
       table.timestamps(true, true)

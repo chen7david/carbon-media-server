@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.upload-form {
+    max-width: 300px;
+}
+
+.video-poster-mode {
+    width: 280px;
+}
+
+.movie-card {
+    background-color: #333;
+    width: 280px;
+    height: 250px; 
+    margin: 5px;
+}
+
+.movie-card-info {
+    padding: 8px;
+}
+
+.movie-card-tile {
+    color: aliceblue;
+    margin-bottom: 5px;
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    {% include "components/navbar.html" %}
+    <div class="container">
+        {% block body %} {% endblock %}
+    </div>
+    <script src="/assets/scripts/jquery-3.4.1.slim.min.js"></script>
+    <script src="/assets/scripts/popper.min.js"></script>
+    <script src="/assets/scripts/bootstrap.min.js"></script>
+    {% block scriptbottom %} {% endblock %}
+</body>
+</html>

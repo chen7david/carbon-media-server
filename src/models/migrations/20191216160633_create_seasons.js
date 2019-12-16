@@ -2,10 +2,10 @@
 exports.up = function(knex) {
   return knex.schema.createTable('seasons', table => {
       table.increments()
-      table.unique(['number', 'tvShow_id'])
+      table.unique(['number', 'tvshow_id'])
       table.string('seasonId').unique().notNullable()
       table.integer('number').unique()
-      table.integer('tvShow_id').references('id').inTable('tv_shows').onDelete('CASCADE').index()
+      table.integer('tvshow_id').references('id').inTable('tvshows').onDelete('CASCADE').index()
       table.timestamps(true, true)
   })
 }

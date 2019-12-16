@@ -1,0 +1,57 @@
+{% extends "./../components/template.html" %}
+
+{% block body %} 
+<div class="card-body upload-form">
+    <form action="/movies/create" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" name="title" class="form-control" placeholder="Moana">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text">Resolution</label>
+            </div>
+            <select name="resolution" class="custom-select">
+                <option selected>Choose...</option>
+                <option value="4K">4K</option>
+                <option value="1080p">1080p</option>
+                <option value="720p">720p</option>
+                <option value="480p">480p</option>
+                <option value="360p">360p</option>
+                <option value="240p">240p</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea name="description" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="input-group my-3">
+            <div class="custom-file">
+              <input type="file" name="videos" class="custom-file-input">
+              <label class="custom-file-label">Choose Videos files</label>
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <div class="custom-file">
+              <input type="file" name="covers" class="custom-file-input">
+              <label class="custom-file-label">Choose Covers files</label>
+            </div>
+        </div>
+        <div class="input-group my-3">
+            <div class="custom-file">
+              <input type="file" name="posters" class="custom-file-input">
+              <label class="custom-file-label">Choose Posters files</label>
+            </div>
+        </div>
+        <div class="input-group my-3">
+          <div class="custom-file">
+            <input type="file" name="captions" class="custom-file-input">
+            <label class="custom-file-label">Choose Captions files</label>
+          </div>
+        </div>
+        <button class="btn btn-outline-success">UPLOAD</button>
+      </form>
+</div>
+{% endblock %}
+
+    

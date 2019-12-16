@@ -1,7 +1,7 @@
 const BaseModel = require('./BaseModel')
 const crypto = require('crypto')
 
-class Episode extends BaseModel {
+class Season extends BaseModel {
 
     async $beforeInsert() {
         this.movieId = "SE" + crypto.randomBytes(5).toString('hex').toUpperCase()
@@ -24,4 +24,4 @@ class Episode extends BaseModel {
     }
 }
 
-module.exports = Episode
+module.exports = Season

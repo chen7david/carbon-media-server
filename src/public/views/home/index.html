@@ -1,0 +1,21 @@
+{% extends "./../components/template.html" %}
+
+{% block body %} 
+<div class="card-body" >
+    <form action="/video/upload" method="post" max-width="300" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="title" class="form-control">
+        <input type="text" name="description" placeholder="description" class="form-control">
+        <input type="text" name="duration" placeholder="duration" class="form-control">
+        <input type="file" name="movie" class="form-control">
+        <button class="btn">SUBMIT</button>
+    </form>
+</div>
+<video width="500" height="280" autoplay controls controlsList="nodownload">
+    <source src="/media/video/1575591741854.mp4" type="video/mp4">
+    <track label="English" kind="subtitles" srclang="en" src="/media/caption/1575591741854_en.vtt" default>
+    <!-- <track label="Chinese" kind="subtitles" srclang="en" src="/media/video/Avatar.cn.vtt" default> -->
+</video>
+<a href="/media/video/1575590956144.mp4" class="btn btn-light btn-sm" download="avatar">DOWNLOAD</a>
+{% endblock %}
+
+    
