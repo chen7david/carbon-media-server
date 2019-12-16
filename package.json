@@ -1,0 +1,33 @@
+{
+  "name": "media-server-plus",
+  "version": "1.0.0",
+  "description": "Refactoring of MS repository code",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon ./src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chen7david/media-server-plus.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chen7david/media-server-plus/issues"
+  },
+  "homepage": "https://github.com/chen7david/media-server-plus#readme",
+  "dependencies": {
+    "@hapi/joi": "^16.1.8",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-promise-router": "^3.0.3",
+    "knex": "^0.20.4",
+    "multer": "^1.4.2",
+    "nunjucks": "^3.2.0",
+    "objection": "^2.0.3",
+    "objection-db-errors": "^1.1.2",
+    "pg": "^7.14.0",
+    "pluralize": "^8.0.0"
+  }
+}
