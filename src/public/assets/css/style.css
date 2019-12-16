@@ -26,3 +26,20 @@
     color: aliceblue;
     margin-bottom: 5px;
 }
+
+.cover-card{
+    padding: 5px;
+}
+
+.cover {
+    width: 200px;
+    border: transparent 1px solid;
+    position: relative;
+} 
+
+.cover:hover {
+    cursor: pointer;
+    border: #333 4px solid;
+    transform: scale3d(1.1);
+    animation: all 2s ease-in-out;
+} 

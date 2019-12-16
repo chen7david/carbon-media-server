@@ -1,0 +1,16 @@
+{% extends "./../components/template.html" %}
+
+{% block body %} 
+<h1>Welcome to {{tvshow.title}} Seasons</h1>
+<div class="controls">
+  <a href="/tvshows/create" class="btn btn-outline-success btn-sm">ADD SEASON</a>
+</div>
+<div class="row mt-3">
+  {% for season in tvshow.seasons %}
+      <div class="">
+        {{season.number}}
+      </div>
+  {% endfor %}
+{% endblock %}
+</div>
+    

@@ -5,9 +5,13 @@ const { LANGS } = require('./../config')
 module.exports = {
 
     index: async (req, res) => {
-        const tvshows = await TvShow.query().withGraphFetched('[seasons, covers, posters]')
-        console.log({tvshows})
-        res.render('tvshows/index.html', { tvshows })
+        const { tvshowId } = req.params
+        console.log({tvshowId})
+        const tvshow = await TvShow.query()
+            .withGraphFetched('[seasons, covers, posters]')
+            .where('tvshowId', tvshowId).first()
+        console.log({tvshow})
+        res.render('seasons/index.html', { tvshow })
     },
     create: async (req, res) => {
         res.render('tvshows/create.html')
