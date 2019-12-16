@@ -13,7 +13,7 @@ const {
 // Set app parameters
 app.set('view engine', 'njk')
 
-nunjucks.configure(__dirname + '/public/views', {
+nunjucks.configure(__dirname + '/views', {
     autoescape: true,
     express: app
 })
