@@ -6,11 +6,9 @@ module.exports = {
 
     index: async (req, res) => {
         const { tvshowId } = req.params
-        console.log({tvshowId})
         const tvshow = await TvShow.query()
             .withGraphFetched('[seasons, covers, posters]')
             .where('tvshowId', tvshowId).first()
-        console.log({tvshow})
         res.render('seasons/index.html', { tvshow })
     },
     create: async (req, res) => {

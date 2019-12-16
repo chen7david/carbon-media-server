@@ -6,7 +6,6 @@ module.exports = {
 
     index: async (req, res) => {
         const movies = await Movie.query().withGraphFetched('[captions,videos,posters,covers]')
-        console.log({movies})
         res.render('movies/index.html', { movies })
     },
     create: async (req, res) => {
@@ -61,7 +60,6 @@ module.exports = {
             return res.redirect('/movies')
         }
     },
-
     delete: async (req, res) => {
 
         try{

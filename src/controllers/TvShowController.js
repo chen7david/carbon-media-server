@@ -6,14 +6,12 @@ module.exports = {
 
     index: async (req, res) => {
         const tvshows = await TvShow.query().withGraphFetched('[seasons, covers, posters]')
-        console.log({tvshows})
         res.render('tvshows/index.html', { tvshows })
     },
     create: async (req, res) => {
         res.render('tvshows/create.html')
     },
     insert: async (req, res) => {
-
         try{
             const object = await TvShow.transaction( async trx => {
 
