@@ -8,10 +8,10 @@ router.route('/movies')
 router.route('/movies/create')
     .get(MovieController.create)
     .post(upload.fields([
-        {name:'videos', maxCount: 1},
-        {name:'covers', maxCount: 1},
-        {name:'posters', maxCount: 1},
-        {name:'captions', maxCount: 1},
+        {name:'videos', maxCount: 6},
+        {name:'covers', maxCount: 6},
+        {name:'posters', maxCount: 6},
+        {name:'captions', maxCount: 6},
     ]), MovieController.insert)   
 
 router.route('/movies/:movieId/delete')

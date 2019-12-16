@@ -5,7 +5,8 @@ const { LANGS } = require('./../config')
 module.exports = {
 
     index: async (req, res) => {
-        const movies = await Movie.query().withGraphFetched('captions')
+        const movies = await Movie.query().withGraphFetched('[captions,videos,posters,covers]')
+        console.log({movies})
         res.render('movies/index.html', { movies })
     },
     create: async (req, res) => {
@@ -15,21 +16,43 @@ module.exports = {
 
         const { title, resolution, description } = req.body
         const { videos, covers, posters, captions } = req.files
-        console.log(Object.keys(LANGS))
 
         try{
             const object = await Movie.transaction( async trx => {
+
                 const movie = await Movie.query(trx).insert({
                     title,
                     resolution,
-                    description,
-                    fileName: vidoes[0].filename,
-                    size: vidoes[0].size,
-                    mimeType: vidoes[0].mimetype,
+                    description
                 })
 
-                return movie;
+                for(const [index, video] of videos.entries()){
+                    const { filename, size, mimetype } = video
+                    await movie.$relatedQuery('videos', trx)
+                        .insert({filename, size, mimetype, default: index == 0})
+                }
 
+                for(const [index, cover] of covers.entries()){
+                    const { filename, size, mimetype } = cover
+                    await movie.$relatedQuery('covers', trx)
+                        .insert({filename, size, mimetype, default: index == 0})
+                }
+
+                for(const [index, poster] of posters.entries()){
+                    const { filename, size, mimetype } = poster
+                    await movie.$relatedQuery('posters', trx)
+                        .insert({filename, size, mimetype, default: index == 0})
+                }
+
+                for(const [index, caption] of captions.entries()){
+                    const { filename, size, mimetype, originalname } = caption
+                    let code = originalname.split('.')[1]
+                    const srclang = Object.keys(LANGS).includes(code)? code : 'en'
+                    await movie.$relatedQuery('captions', trx)
+                        .insert({filename, size, mimetype, label: LANGS[code], srclang})
+                }
+
+                return movie;
             })
 
             return res.redirect('/movies')

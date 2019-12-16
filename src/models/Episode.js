@@ -9,15 +9,42 @@ class Episode extends BaseModel {
 
     static get relationMappings(){
         
-        const EpisodeCaption = require('./EpisodeCaption')
+        const Video = require('./Video')
+        const Cover = require('./Cover')
+        const Poster = require('./Poster')
+        const Caption = require('./Caption')
 
         return {
-            captions:{
+            videos:{
                 relation: BaseModel.HasManyRelation,
-                modelClass: EpisodeCaption,
+                modelClass: Video,
                 join:{
                     from:'episodes.id',
-                    to:'episode_captions.episode_id'
+                    to:'videos.episode_id'
+                }
+            },
+            covers:{
+                relation: BaseModel.HasManyRelation,
+                modelClass: Cover,
+                join:{
+                    from:'episodes.id',
+                    to:'covers.episode_id'
+                }
+            },
+            posters:{
+                relation: BaseModel.HasManyRelation,
+                modelClass: Poster,
+                join:{
+                    from:'episodes.id',
+                    to:'posters.episode_id'
+                }
+            },
+            captions:{
+                relation: BaseModel.HasManyRelation,
+                modelClass: Caption,
+                join:{
+                    from:'episodes.id',
+                    to:'captions.episode_id'
                 }
             }
         }
