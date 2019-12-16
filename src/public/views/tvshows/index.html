@@ -1,0 +1,31 @@
+{% extends "./../components/template.html" %}
+
+{% block body %} 
+<h1>Welcome to TvShows</h1>
+<div class="controls">
+  <a href="/movies/create" class="btn btn-outline-success btn-sm">ADD MOVIE</a>
+</div>
+<div class="row mt-3">
+  {% for tvshow in tvshows %}
+      <div class="movie-card">
+        <div class="movie-card-poster">
+            <video poster="/media/image/{{movie.posters[0].filename}}" class="video-poster-mode" style="outline: none" preload="none"  controls controlsList="nodownload">
+                <source src="/media/video/{{movie.videos[0].filename}}" type="{{movie.videos[0].mimetype}}">
+                {% for caption in movie.captions %}
+                  <track label="{{caption.label}}" kind="subtitles" srclang="{{caption.srclang}}" src="/media/captions/{{caption.filename}}" default>
+                {% endfor %}
+            </video>
+        </div>
+        <div class="movie-card-info">
+            <div class="movie-card-tile">
+                    {{movie.title}}
+            </div>
+            <a href="/media/video/{{movie.videos[0].filename}}" class="btn btn-outline-light btn-sm" download="{{movie.title}}">DOWNLOAD</a>
+            <a href="/movies/{{movie.movieId}}/delete" class="btn btn-outline-danger btn-sm">DELETE</a>
+            <a href="/movies/{{movie.movieId}}" class="btn btn-outline-success btn-sm">EDIT</a>
+        </div>
+    </div>
+  {% endfor %}
+{% endblock %}
+</div>
+    

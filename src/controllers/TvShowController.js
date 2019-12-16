@@ -1,11 +1,11 @@
-const { Movie } = require('./../models')
+const { TvShow } = require('./../models')
 const { transaction } = require('objection')
 const files = require('./../helpers/files')
 const { LANGS } = require('./../config')
 module.exports = {
 
     index: async (req, res) => {
-        const movies = await Movie.query().withGraphFetched('[captions,videos,posters,covers]')
+        const movies = await TvShow.query().withGraphFetched('[captions,videos,posters,covers]')
         console.log({movies})
         res.render('movies/index.html', { movies })
     },
