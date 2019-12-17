@@ -45,6 +45,7 @@ module.exports = {
             return res.redirect('/tvshows')
         }catch(err){
             console.log(err)
+            files.rollback(files, req.files)
             return res.redirect('/tvshows')
         }
     },

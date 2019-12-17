@@ -48,6 +48,7 @@ class BaseModel extends DBErrors(Model) {
         async $beforeDelete() {
             const relationMappings = Object.keys(this.constructor.relationMappings)
 
+            // DELETE RELATED FILES STORED ON THE SYSTEM BEFORE DELETING THE OBJECT
             if(relationMappings.includes('covers')){
                const covers = await this.$relatedQuery('covers')
                covers.forEach(cover => files.delete('/image/'+cover.filename))

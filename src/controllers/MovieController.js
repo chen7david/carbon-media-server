@@ -1,5 +1,6 @@
 const { Movie } = require('./../models')
 const { LANGS } = require('./../config')
+const files = require('./../helpers/files')
 module.exports = {
 
     index: async (req, res) => {
@@ -11,11 +12,11 @@ module.exports = {
     },
     insert: async (req, res) => {
 
+        const { title, resolution, description } = req.body
+        const { videos, covers, posters, captions } = req.files
+
         try{
             const object = await Movie.transaction( async trx => {
-
-                const { title, resolution, description } = req.body
-                const { videos, covers, posters, captions } = req.files
 
                 const movie = await Movie.query(trx).insert({
                     title,
@@ -55,6 +56,7 @@ module.exports = {
             return res.redirect('/movies')
         }catch(err){
             console.log(err)
+            files.rollback(files, req.files)
             return res.redirect('/movies')
         }
     },

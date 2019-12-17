@@ -57,6 +57,7 @@ module.exports = {
             return res.redirect(`/tvshows/${tvshowId}/tvshowId/seasons/create`)
         }catch(err){
             console.log(err)
+            files.rollback(files, req.files)
             return res.redirect(`/tvshows`)
         }
     },

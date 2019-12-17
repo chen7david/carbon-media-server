@@ -12,5 +12,27 @@ module.exports = {
                 return
             }
         })
+    },
+    rollback: (files, uploads) => {
+        const { videos, covers, posters, captions } = uploads
+        
+        if(videos && videos.length > 0){
+           videos.forEach(video => files.delete('/video/'+video.filename))
+        }
+
+        if(covers && covers.length > 0){
+            covers.forEach(cover => files.delete('/image/'+cover.filename))
+        }
+
+        if(posters && posters.length > 0){
+            posters.forEach(poster => files.delete('/image/'+poster.filename))
+        }
+
+        if(captions && captions.length > 0){
+            captions.forEach(caption => files.delete('/captions/'+caption.filename))
+        }
+        
     }
 }
+
+
