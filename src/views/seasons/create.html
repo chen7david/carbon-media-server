@@ -2,7 +2,7 @@
 
 {% block body %} 
 <div class="card-body upload-form">
-    <form action="/tvshows/{{tvshow.tvshowId}}/seasons/create" method="post" enctype="multipart/form-data">
+    <form action="/tvshows/{{tvshow.tvshowId}}/tvshowId/seasons/create" method="post" enctype="multipart/form-data">
         <div class="form-group">
           <label>Season Number</label>
           <input type="number" name="number" class="form-control" value="{{tvshow.seasons.length + 1}}">

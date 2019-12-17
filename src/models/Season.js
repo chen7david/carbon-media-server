@@ -18,7 +18,7 @@ class Season extends BaseModel {
                 relation: BaseModel.HasManyRelation,
                 modelClass: Episode,
                 join:{
-                    from:'seaons.id',
+                    from:'seasons.id',
                     to:'episodes.season_id'
                 }
             },

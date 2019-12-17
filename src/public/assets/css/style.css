@@ -43,3 +43,12 @@
     transform: scale3d(1.1);
     animation: all 2s ease-in-out;
 } 
+
+.poster-banner-card {
+    background-color: #333;
+    width: 100%;
+}
+
+.poster {
+    width: 200px;
+}

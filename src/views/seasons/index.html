@@ -1,15 +1,27 @@
 {% extends "./../components/template.html" %}
 
 {% block body %} 
-<h1>Welcome to {{tvshow.title}} Seasons</h1>
-<div class="row">
-  <a href="/tvshows/{{tvshow.tvshowId}}/seasons/create" class="btn btn-outline-success mr-1">ADD</a>
+<h1>{{tvshow.title}}</h1>
+<a href="/tvshows" class="btn btn-dark mr-1">BACK</a>
+
+<a href="/tvshows/{{tvshow.tvshowId}}/tvshowId/seasons/create" class="btn btn-outline-success mx-1">ADD SEASON</a>
+<a href="/tvshows/{{tvshow.tvshowId}}/tvshowId/seasons/{{curSeason.seasonId}}/seasonId/delete" class="btn btn-outline-danger mx-1">DELETE SEASON</a>
+<a href="/tvshows/{{tvshow.tvshowId}}/tvshowId/seasons/create" class="btn btn-outline-success mx-1">ADD EPESODE</a>
+<p class="mt-2">{{tvshow.description}}</p>
+<div class="row m-1">
   {% for season in tvshow.seasons %}
-        <a href="" class="btn btn-outline-success mx-1">{{season.number}}</a>
+        <a 
+          href="/tvshows/{{tvshow.tvshowId}}/tvshowId/seasons/{{season.seasonId}}/seasonId" 
+          class="btn {% if season.seasonId == curSeason.seasonId %}active{% endif %} btn-outline-success m-1"
+        >
+          S{% if season.number < 10 %}0{% endif %}{{season.number}}
+        </a>
   {% endfor %}
 </div>
-<div class="row mt-3">
+<hr>
+<div class="row">
+
+</div>
   
 {% endblock %}
-</div>
     

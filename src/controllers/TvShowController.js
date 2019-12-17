@@ -55,13 +55,18 @@ module.exports = {
             const object = await TvShow.transaction(async trx => {
                 const { tvshowId } = req.params
                 const tvshow = await TvShow.query(trx)
-                    .withGraphFetched('[seasons, covers, posters]')
+                    .withGraphFetched('[seasons.[covers, posters], covers, posters]')
                     .where('tvshowId', tvshowId).first()
 
-                const { covers, posters } = tvshow
+                const { covers, posters, seasons} = tvshow
 
                 covers.forEach(cover => files.delete('/image/'+cover.filename))
                 posters.forEach(poster => files.delete('/image/'+poster.filename))
+                
+                seasons.forEach(season => {
+                    season.covers.forEach(cover => files.delete('/image/'+cover.filename))
+                    season.posters.forEach(poster => files.delete('/image/'+poster.filename))
+                })
 
                 await tvshow.$query(trx).delete()
             })

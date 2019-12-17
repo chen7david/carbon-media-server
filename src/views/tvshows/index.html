@@ -9,11 +9,11 @@
   {% for tvshow in tvshows %}
       <div class="">
         <div class="cover-card">
-            <a href="/tvshows/{{tvshow.tvshowId}}/seasons">
+            <a href="/tvshows/{{tvshow.tvshowId}}/tvshowId/seasons/{{tvshow.seasons[0].seasonId}}/seasonId">
                 <img class="cover" src="/media/image/{{tvshow.covers[0].filename}}" alt="cover">
             </a>
         </div>
-        <div class="movie-card-info">
+        <div class="movie-card-info text-center">
             <div class="">
                     {{tvshow.title}}
             </div>
