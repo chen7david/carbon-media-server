@@ -3,6 +3,7 @@ const Knex = require('knex')(knexfile)
 const pluralize = require('pluralize')
 const { Model } = require('objection')
 const { DBErrors } = require('objection-db-errors')
+const files = require('./../helpers/files')
 
 Model.knex(Knex)
 
@@ -42,6 +43,30 @@ class BaseModel extends DBErrors(Model) {
         $beforeUpdate(){
             const timestamp = new Date().toISOString()
             this.updated_at = timestamp 
+        }
+
+        async $beforeDelete() {
+            const relationMappings = Object.keys(this.constructor.relationMappings)
+
+            if(relationMappings.includes('covers')){
+               const covers = await this.$relatedQuery('covers')
+               covers.forEach(cover => files.delete('/image/'+cover.filename))
+            }
+
+            if(relationMappings.includes('posters')){
+                const posters = await this.$relatedQuery('posters')
+                posters.forEach(poster => files.delete('/image/'+poster.filename))
+            }
+
+            if(relationMappings.includes('captions')){
+                const captions = await this.$relatedQuery('captions')
+                captions.forEach(caption => files.delete('/image/'+caption.filename))
+            }
+
+            if(relationMappings.includes('videos')){
+                const videos = await this.$relatedQuery('videos')
+                videos.forEach(video => files.delete('/video/'+video.filename))
+            }
         }
 }
 

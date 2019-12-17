@@ -1,6 +1,5 @@
 const BaseModel = require('./BaseModel')
 const crypto = require('crypto')
-
 class Season extends BaseModel {
 
     async $beforeInsert() {
