@@ -67,6 +67,15 @@ class BaseModel extends DBErrors(Model) {
                 const videos = await this.$relatedQuery('videos')
                 videos.forEach(video => files.delete('/video/'+video.filename))
             }
+
+            if(relationMappings.includes('seasons')){
+                const seasons = await this.$relatedQuery('seasons')
+                for(let season of seasons){
+                    await season.$query().delete()
+                }
+            }
+
+            
         }
 }
 
