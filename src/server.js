@@ -8,7 +8,8 @@ const {
     HomeRoutes, 
     MovieRoutes,
     TvShowRoutes,
-    SeasonRoutes
+    SeasonRoutes,
+    EpisodeRoutes
 } = require('./routes')
 
 // Set app parameters
@@ -27,6 +28,7 @@ app.use(HomeRoutes)
 app.use(MovieRoutes)
 app.use(TvShowRoutes)
 app.use(SeasonRoutes)
+app.use(EpisodeRoutes)
 
 // Expose public directories
 app.use('/media', express.static(__dirname + '/public/uploads'))

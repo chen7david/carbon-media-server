@@ -4,7 +4,7 @@ const crypto = require('crypto')
 class Episode extends BaseModel {
 
     async $beforeInsert() {
-        this.movieId = "SE" + crypto.randomBytes(5).toString('hex').toUpperCase()
+        this.episodeId = "SE" + crypto.randomBytes(5).toString('hex').toUpperCase()
     }
 
     static get relationMappings(){

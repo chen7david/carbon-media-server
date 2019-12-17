@@ -3,4 +3,5 @@ module.exports = {
     MovieRoutes: require('./MovieRoutes'),
     TvShowRoutes: require('./TvShowRoutes'),
     SeasonRoutes: require('./SeasonRoutes'),
+    EpisodeRoutes: require('./EpisodeRoutes'),
 }

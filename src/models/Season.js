@@ -8,11 +8,20 @@ class Season extends BaseModel {
 
     static get relationMappings(){
         
+        const TvShow = require('./TvShow')
         const Episode = require('./Episode')
         const Poster = require('./Poster')
         const Cover = require('./Cover')
         
         return {
+            tvshow:{
+                relation: BaseModel.BelongsToOneRelation,
+                modelClass: TvShow,
+                join:{
+                    from:'seasons.tvshow_id',
+                    to:'tvshows.id'
+                }
+            },
             episodes:{
                 relation: BaseModel.HasManyRelation,
                 modelClass: Episode,

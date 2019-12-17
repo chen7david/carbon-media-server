@@ -9,7 +9,7 @@
   {% for tvshow in tvshows %}
       <div class="">
         <div class="cover-card">
-            <a href="/tvshows/{{tvshow.tvshowId}}/tvshowId/seasons/{{tvshow.seasons[0].seasonId}}/seasonId">
+            <a href="/tvshows/{{tvshow.tvshowId}}/seasons/{{tvshow.seasons[0].seasonId}}">
                 <img class="cover" src="/media/image/{{tvshow.covers[0].filename}}" alt="cover">
             </a>
         </div>
@@ -18,7 +18,7 @@
                     {{tvshow.title}}
             </div>
             <a href="/tvshows/{{tvshow.tvshowId}}/delete" class="btn btn-outline-danger btn-sm">DELETE</a>
-            <a href="/tvshows/{{tvshow.tvshowId}}/seasons" class="btn btn-outline-success btn-sm">SEASON</a>
+            <a href="/tvshows/{{tvshow.tvshowId}}/seasons/{{tvshow.seasons[0].seasonId}}" class="btn btn-outline-success btn-sm">SEASON</a>
         </div>
     </div>
   {% endfor %}

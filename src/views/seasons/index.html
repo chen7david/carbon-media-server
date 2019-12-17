@@ -4,9 +4,9 @@
 <h1>{{tvshow.title}}</h1>
 <a href="/tvshows" class="btn btn-dark mr-1">BACK</a>
 
-<a href="/tvshows/{{tvshow.tvshowId}}/tvshowId/seasons/create" class="btn btn-outline-success mx-1">ADD SEASON</a>
+<a href="/tvshows/{{tvshow.tvshowId}}/seasons/create" class="btn btn-outline-success mx-1">ADD SEASON</a>
 <a href="/tvshows/{{tvshow.tvshowId}}/tvshowId/seasons/{{curSeason.seasonId}}/seasonId/delete" class="btn btn-outline-danger mx-1">DELETE SEASON</a>
-<a href="/tvshows/{{tvshow.tvshowId}}/tvshowId/seasons/create" class="btn btn-outline-success mx-1">ADD EPESODE</a>
+<a href="/tvshows/{{tvshow.tvshowId}}/seasons/{{curSeason.seasonId}}/episode" class="btn btn-outline-success mx-1">ADD EPESODE</a>
 <p class="mt-2">{{tvshow.description}}</p>
 <div class="row m-1">
   {% for season in tvshow.seasons %}
@@ -20,7 +20,26 @@
 </div>
 <hr>
 <div class="row">
-
+  {% for episode in curSeason.episodes %}
+  <div class="movie-card">
+    <div class="movie-card-poster">
+        <video poster="/media/image/{{episode.posters[0].filename}}" class="video-poster-mode" style="outline: none" preload="none"  controls controlsList="nodownload">
+            <source src="/media/video/{{episode.videos[0].filename}}" type="{{episode.videos[0].mimetype}}">
+            {% for caption in episode.captions %}
+              <track label="{{caption.label}}" kind="subtitles" srclang="{{caption.srclang}}" src="/media/captions/{{caption.filename}}" default>
+            {% endfor %}
+        </video>
+    </div>
+    <div class="movie-card-info">
+        <div class="movie-card-tile">
+                {{movie.title}}
+        </div>
+        <a href="/media/video/{{episode.videos[0].filename}}" class="btn btn-outline-light btn-sm" download="{{episode.title}}">DOWNLOAD</a>
+        <a href="/movies/{{movie.movieId}}/delete" class="btn btn-outline-danger btn-sm">DELETE</a>
+        <a href="/movies/{{movie.movieId}}" class="btn btn-outline-success btn-sm">EDIT</a>
+    </div>
+</div>
+  {% endfor %}
 </div>
   
 {% endblock %}

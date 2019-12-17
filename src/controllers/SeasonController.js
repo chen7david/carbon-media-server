@@ -8,7 +8,7 @@ module.exports = {
             .withGraphFetched('[seasons, covers, posters]')
             .where('tvshowId', tvshowId).first()
         const curSeason = await Season.query()
-            .withGraphFetched('episodes')
+            .withGraphFetched('episodes.[videos, covers, posters]')
             .where('seasonId', seasonId).first()
         res.render('seasons/index.html', { tvshow, curSeason })
     },
