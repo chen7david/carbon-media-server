@@ -60,14 +60,14 @@ class BaseModel extends DBErrors(Model) {
 
             if(relationMappings.includes('captions')){
                 const captions = await this.$relatedQuery('captions')
-                captions.forEach(caption => files.delete('/image/'+caption.filename))
+                captions.forEach(caption => files.delete('/captions/'+caption.filename))
             }
 
             if(relationMappings.includes('videos')){
                 const videos = await this.$relatedQuery('videos')
                 videos.forEach(video => files.delete('/video/'+video.filename))
             }
-
+            // CALL DELETE ON CHILD OBJECTS
             if(relationMappings.includes('seasons')){
                 const seasons = await this.$relatedQuery('seasons')
                 for(let season of seasons){
@@ -75,7 +75,13 @@ class BaseModel extends DBErrors(Model) {
                 }
             }
 
-            
+            if(relationMappings.includes('episodes')){
+                const episodes = await this.$relatedQuery('episodes')
+                for(let episode of episodes){
+                    await episode.$query().delete()
+                }
+            }
+
         }
 }
 

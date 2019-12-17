@@ -1,6 +1,4 @@
 const { Movie } = require('./../models')
-const { transaction } = require('objection')
-const files = require('./../helpers/files')
 const { LANGS } = require('./../config')
 module.exports = {
 
@@ -63,19 +61,12 @@ module.exports = {
     delete: async (req, res) => {
 
         try{
+
             const object = await Movie.transaction(async trx => {
+
                 const { movieId } = req.params
                 const movie = await Movie.query(trx)
-                    .withGraphFetched('[videos, covers, posters, captions]')
                     .where('movieId', movieId).first()
-
-                const { videos, covers, posters, captions } = movie
-
-                videos.forEach(video => files.delete('/video/'+video.filename))
-                covers.forEach(cover => files.delete('/image/'+cover.filename))
-                posters.forEach(poster => files.delete('/image/'+poster.filename))
-                captions.forEach(caption => files.delete('/captions/'+caption.filename))
-
                 await movie.$query(trx).delete()
             })
 
